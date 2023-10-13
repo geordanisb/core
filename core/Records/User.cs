@@ -10,7 +10,7 @@ namespace core.Records
 
 		public override string ToString()
         {
-			return $"Id: {Id} | FirstName: {FirstName} | LastName: {LastName} | Age: {Age}";
+			return $"***Id: {Id} | FirstName: {FirstName} | LastName: {LastName} | Age: {Age}***";
         }
     }
 }
