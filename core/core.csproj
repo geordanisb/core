@@ -15,8 +15,10 @@
 
   <ItemGroup>
     <None Remove="Records\" />
+    <None Remove="Windows\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Records\" />
+    <Folder Include="Windows\" />
   </ItemGroup>
 </Project>
