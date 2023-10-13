@@ -13,4 +13,10 @@
 
 
 
+  <ItemGroup>
+    <None Remove="Records\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Records\" />
+  </ItemGroup>
 </Project>
