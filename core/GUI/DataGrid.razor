@@ -1,0 +1,46 @@
+﻿@using Microsoft.Fast.Components.FluentUI
+@using Records
+
+<div style="overflow-y: scroll;">
+    @*<FluentSearch @bind-Value=value style="width: 100%;"></FluentSearch>*@
+    <FluentDataGrid Style="height: 80vh;" Items=@Data Virtualize="true" ItemSize="32" GridTemplateColumns="1fr 1fr 1fr 1fr">
+        <ChildContent>
+            @foreach (var f in Fields)
+            {
+                <TemplateColumn Title="@f.Item2">
+                    @{
+                        Record ctx = context;
+                        var pi = RecordType.GetProperty(f.Item1);
+                        var val = pi?.GetValue(ctx);
+                    }
+                    <span>@(val)</span>
+                </TemplateColumn>
+            }
+        </ChildContent>
+        <EmptyContent>
+            <FluentIcon Icon="Icons.Filled.Size24.Crown" Color="@Color.Accent" />
+        </EmptyContent>
+    </FluentDataGrid>
+</div>
+
+@code {
+    //record User(int Id, string FirstName, string LastName);
+    public string value { get; set; }
+    (string,string)[] Fields { get; set; }
+
+    [Parameter]
+    public Type RecordType { get; set; }
+    [Parameter]
+    public IQueryable<Record> Data { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var mi = RecordType.GetMethod("ImportantFields");
+        var r = mi?.Invoke(null,null);
+        Fields = r as (string, string)[];
+        base.OnInitialized();
+    }
+
+
+}
+

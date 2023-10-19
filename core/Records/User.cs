@@ -1,19 +1,21 @@
 ﻿using System;
-using Microsoft.AspNetCore.Components;
 
 namespace core.Records
 {
-	public partial class User:ComponentBase
+	public class User: Person
 	{
-		public int Id { get; set; }
-		public string FirstName { get; set; } = "";
-		public string LastName { get; set; } = "";
-		public int Age { get; set; }
+		public string Role { get; set; }
+		public int CountAccess { get; set; }
 
-		public override string ToString()
+        public static new (string, string)[] ImportantFields()
         {
-			return $"!!!123Id: {Id} | FirstName: {FirstName} | LastName: {LastName} | Age: {Age}!!!";
+            return new[] {
+                ("Id", "ID"),
+                ("Role", "Role"),
+                ("CountAccess", "No. Access")
+            };
         }
+
     }
 }
 
