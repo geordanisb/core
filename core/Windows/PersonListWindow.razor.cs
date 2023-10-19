@@ -6,20 +6,6 @@ namespace core.Windows
 {
 	public partial class PersonListWindow: ListWindowParent
 	{
-        //[Parameter]
-        //public Type RecordType { get; set; }
-        //[Parameter]
-        //public IQueryable<Record> Data { get; set; }
-
-        //protected override void OnInitialized()
-        //{
-        //    base.OnInitialized();
-        //}
-
-        //public virtual Record? getRecords()
-        //{
-        //    return null;
-        //}
         public override IQueryable<Record> GetRecords()
         {
             return new[]
