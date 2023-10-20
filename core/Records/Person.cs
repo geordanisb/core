@@ -8,12 +8,12 @@ namespace core.Records
 		public string LastName { get; set; }
 		public int Age { get; set; }
 
-        public static new (string,string)[] ImportantFields()
+        public static new Dictionary<string,Field> ImportantFields()
         {
-            return new[] {
-                ("FirstName","Name"),
-                ("LastName", "Last Name"),
-                ("Age", "Age")
+            return new Dictionary<string, Field> {
+                { "FirstName", new Field{ Type=typeof(string),Label="Name"} },
+                { "LastName", new Field{ Type=typeof(string),Label="Last Name"} },
+                { "Age", new Field{ Type=typeof(int),Label="Age"} },
             };
         }
     }

@@ -1,0 +1,42 @@
+﻿@using Microsoft.Fast.Components.FluentUI
+@using Records
+
+<div>
+    <FluentGrid>
+        <FluentGridItem>1</FluentGridItem>
+        <FluentGridItem>2</FluentGridItem>
+        <FluentGridItem>3</FluentGridItem>
+        <FluentGridItem>4</FluentGridItem>
+        <FluentGridItem>5</FluentGridItem>
+        <FluentGridItem>6</FluentGridItem>
+        <FluentGridItem>7</FluentGridItem>
+        <FluentGridItem>9</FluentGridItem>
+        <FluentGridItem>9</FluentGridItem>
+        <FluentGridItem>10</FluentGridItem>
+        <FluentGridItem>11</FluentGridItem>
+        <FluentGridItem>12</FluentGridItem>
+
+    </FluentGrid>
+</div>
+
+@code {
+    //record User(int Id, string FirstName, string LastName);
+    public string value { get; set; }
+    Dictionary<string, Field> Fields { get; set; }
+
+    [Parameter]
+    public Type RecordType { get; set; }
+    [Parameter]
+    public Record Data { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var mi = RecordType.GetMethod("ImportantFields");
+        var r = mi?.Invoke(null, null);
+        Fields = r as Dictionary<string, Field>;
+        base.OnInitialized();
+    }
+
+
+}
+

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using core.Records;
 
-namespace core.Windows
+namespace core.Windows.parents
 {
 	public partial class ListWindowParent: ComponentBase
 	{

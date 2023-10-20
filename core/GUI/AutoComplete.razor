@@ -3,19 +3,20 @@
 <FluentAutocomplete TOption="string"
                     Data="@Data"
                     Label="Select the record name"
-                    Width="250px"
+                    Width="100%"
                     Placeholder="Select record"
                     OptionText="@(s => s)"
                     OnOptionsSearch="@OnSearchAsync"
                     @bind-SelectedOptions="@SelectedItems"
                     ValueChanged="@ValueChanged"
+                    MaximumOptionsSearch="3"
                     MaximumSelectedOptions="1" />
 @code
 {
 
     //[Parameter]
     //public List<string> Data { get; set; }
-    IEnumerable<string> Data = new[] {"User","Person"};
+    IEnumerable<string> Data = new[] {"User","Person","Company","Project","Customer","Invoice","Receipt","Country"};
 
     [Parameter]
     public EventCallback<string> OnValueChanged { get; set; }

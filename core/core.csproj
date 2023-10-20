@@ -17,11 +17,13 @@
     <None Remove="Records\" />
     <None Remove="Windows\" />
     <None Remove="GUI\" />
+    <None Remove="Windows\parents\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Records\" />
     <Folder Include="Windows\" />
     <Folder Include="GUI\" />
+    <Folder Include="Windows\parents\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Fast.Components.FluentUI" Version="3.2.0" />
