@@ -1,0 +1,40 @@
+﻿@using Microsoft.Fast.Components.FluentUI
+
+<FluentAutocomplete TOption="string"
+                    Data="@Data"
+                    Label="Select the record name"
+                    Width="250px"
+                    Placeholder="Select record"
+                    OptionText="@(s => s)"
+                    OnOptionsSearch="@OnSearchAsync"
+                    @bind-SelectedOptions="@SelectedItems"
+                    ValueChanged="@ValueChanged"
+                    MaximumSelectedOptions="1" />
+@code
+{
+
+    //[Parameter]
+    //public List<string> Data { get; set; }
+    IEnumerable<string> Data = new[] {"User","Person"};
+
+    [Parameter]
+    public EventCallback<string> OnValueChanged { get; set; }
+
+    public IEnumerable<string> SelectedItems = Array.Empty<string>();
+
+    private async Task OnSearchAsync(OptionsSearchEventArgs<string> e)
+    {
+        e.Items = Data.Where(i => i.ToUpper().StartsWith(e.Text.ToUpper()));
+
+    }
+    private async Task ValueChanged(string e)
+    {
+        if (OnValueChanged.HasDelegate)
+        {
+            var si = SelectedItems.Count() > 0
+                ? SelectedItems?.First()
+                : null;
+            await OnValueChanged.InvokeAsync(si);
+        }
+    }
+}
