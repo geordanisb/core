@@ -1,6 +1,6 @@
 ﻿@using Microsoft.Fast.Components.FluentUI
-@using Records
-
+@using core.Models;
+@using core.Records.parent;
 <div>
     <FluentGrid>
         <FluentGridItem>1</FluentGridItem>
@@ -22,7 +22,7 @@
 @code {
     //record User(int Id, string FirstName, string LastName);
     public string value { get; set; }
-    Dictionary<string, Field> Fields { get; set; }
+    Dictionary<string, DataColumn> Fields { get; set; }
 
     [Parameter]
     public Type RecordType { get; set; }
@@ -33,7 +33,7 @@
     {
         var mi = RecordType.GetMethod("ImportantFields");
         var r = mi?.Invoke(null, null);
-        Fields = r as Dictionary<string, Field>;
+        Fields = r as Dictionary<string, DataColumn>;
         base.OnInitialized();
     }
 

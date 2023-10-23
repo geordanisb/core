@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
-using core.Records;
+using core.Records.parent;
 
 namespace core.Windows.parents
 {

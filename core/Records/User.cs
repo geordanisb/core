@@ -1,21 +1,28 @@
 ﻿using System;
+using core.Models;
+using core.Records.parent;
 
 namespace core.Records
 {
-	public class User: Person
-	{
-		public string Role { get; set; }
-		public int CountAccess { get; set; }
+    public class User : Person
+    {
+        public string Role { get; set; } = "";
 
-        public static new Dictionary<string,Field> ImportantFields()
+        public static new IEnumerable<DataColumn> ImportantFields()
         {
-            return new Dictionary<string, Field> {
-                { "Id", new Field{ Type=typeof(int),Label="ID"} },
-                { "Role", new Field{ Type=typeof(int)} },
-                { "CountAccess", new Field{ Type=typeof(int),Label="No. Access"} },
-            };
+            var ifb = Record.ImportantFields();
+            ifb.Append(new DataColumn
+            {
+                Property = nameof(User.Role),
+                Title = "Role",
+                Sortable = true,
+                Pickable = false,
+                Frozen = true,
+                Width = "80px",
+            });
+            return ifb;
         }
-
     }
+
 }
 

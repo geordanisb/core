@@ -1,16 +1,17 @@
 ﻿@using Microsoft.Fast.Components.FluentUI
-@using Records
+@using core.Records.parent;
+@using core.Models;
 
 <div style="overflow-y: scroll;">
     @*<FluentSearch @bind-Value=value style="width: 100%;"></FluentSearch>*@
     <FluentDataGrid Style="height: 80vh;" Items=@Data Virtualize="true" ItemSize="32" GridTemplateColumns="1fr 1fr 1fr 1fr">
         <ChildContent>
-            @foreach (KeyValuePair<string,Field> f in Fields)
+            @foreach (DataColumn f in Fields)
             {
-                <TemplateColumn Title="@(f.Value.Label??f.Key)">
+                <TemplateColumn Title="@(f.Title??f.Property)">
                     @{
                         Record ctx = context;
-                        var pi = RecordType.GetProperty(f.Key);
+                        var pi = RecordType.GetProperty(f.Property);
                         var val = pi?.GetValue(ctx);
                     }
                     <span>@(val)</span>
@@ -26,7 +27,7 @@
 @code {
     //record User(int Id, string FirstName, string LastName);
     public string value { get; set; }
-    Dictionary<string,Field> Fields { get; set; }
+    List<DataColumn> Fields { get; set; }
 
     [Parameter]
     public Type RecordType { get; set; }
@@ -37,7 +38,7 @@
     {
         var mi = RecordType.GetMethod("ImportantFields");
         var r = mi?.Invoke(null,null);
-        Fields = r as Dictionary<string,Field>;
+        Fields = r as List<DataColumn>;
         base.OnInitialized();
     }
 

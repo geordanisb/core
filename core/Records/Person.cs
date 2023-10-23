@@ -1,21 +1,70 @@
 ﻿using System;
+using core.Models;
+using core.Records.parent;
 
 namespace core.Records
 {
-	public class Person: Record
-	{
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public int Age { get; set; }
+    public class Person : Addressable
+    {
+        public string CPF { get; set; } = "";
+        public string FirstName { get; set; } = "";
+        public string LastName { get; set; } = "";
+        public DateOnly BirthDate { get; set; }
 
-        public static new Dictionary<string,Field> ImportantFields()
+        public static new IEnumerable<DataColumn> ImportantFields()
         {
-            return new Dictionary<string, Field> {
-                { "FirstName", new Field{ Type=typeof(string),Label="Name"} },
-                { "LastName", new Field{ Type=typeof(string),Label="Last Name"} },
-                { "Age", new Field{ Type=typeof(int),Label="Age"} },
+            var ifp = new List<DataColumn>
+            {
+                new DataColumn
+                {
+                    Property = nameof(Person.Id),
+                    Title = "ID",
+                    Sortable = true,
+                    Pickable = false,
+                    Frozen = true,
+                    Width = "80px",
+                },
+                new DataColumn
+                {
+                    Property = nameof(Person.CPF),
+                    Title = "CPF",
+                    Sortable = true,
+                    Pickable = false,
+                    Frozen = true,
+                    Width = "80px",
+                },
+                new DataColumn
+                {
+                    Property = nameof(Person.FirstName),
+                    Title = "FirstName",
+                    Sortable = true,
+                    Pickable = false,
+                    Frozen = true,
+                    Width = "80px",
+                },
+                new DataColumn
+                {
+                    Property = nameof(Person.LastName),
+                    Title = "LastName",
+                    Sortable = true,
+                    Pickable = false,
+                    Frozen = true,
+                    Width = "80px",
+                },
+                new DataColumn
+                {
+                    Property = nameof(Person.BirthDate),
+                    Title = "BirdtDate",
+                    Sortable = true,
+                    Pickable = false,
+                    Frozen = true,
+                    Width = "80px",
+                }
             };
+            var res = Addressable.ImportantFields().Concat(ifp).ToList();
+            return res;
         }
     }
+
 }
 
